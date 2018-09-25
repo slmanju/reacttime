@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import HelloWorld from './component/HelloWorld';
+import ContactListContainer from './component/ContactListContainer';
 
 class App extends Component {
   render() {
     return (
-      <HelloWorld/>
+      <ContactListContainer/>
     );
   }
 }
