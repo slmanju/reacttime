@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactList from './ContactList';
+import SearchBar from './SearchBar';
 
 class ContactApp extends Component {
 
@@ -16,7 +17,7 @@ class ContactApp extends Component {
   render() {
     return (
       <div>
-        <label>Search: <input type="text"/> </label>
+        <SearchBar />
         <ContactList contacts={ this.state.contacts } />
       </div>
     );
