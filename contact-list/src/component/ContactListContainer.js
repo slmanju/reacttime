@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Contact from './Contact';
 
 class ContactListContainer extends Component {
   render() {
@@ -6,10 +7,10 @@ class ContactListContainer extends Component {
       <div>
         <label>Search: <input type="text"/> </label>
         <ul>
-          <li>Manjula - manjula@gmail.com</li>
-          <li>Jayawardana - jayawardana@gmail.com</li>
-          <li>Steve - steve@gmail.com</li>
-          <li>Evan - evan@gmail.com</li>
+          <Contact name="Manjula" email="manjula@gmail.com" />
+          <Contact name="Jayawardana" email="jayawardana@gmail.com</" />
+          <Contact name="Steve" email="steve@gmail.com" />
+          <Contact name="Evan" email="evan@gmail.com" />
         </ul>
       </div>
     );
