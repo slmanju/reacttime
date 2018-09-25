@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ContactList from './ContactList';
 
-class ContactListContainer extends Component {
+class ContactApp extends Component {
 
   constructor() {
     super();
@@ -12,7 +12,7 @@ class ContactListContainer extends Component {
       ]
     };
   }
-  
+
   render() {
     return (
       <div>
@@ -23,4 +23,4 @@ class ContactListContainer extends Component {
   }
 }
 
-export default ContactListContainer
+export default ContactApp

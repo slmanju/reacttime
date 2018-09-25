@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import ContactListContainer from './component/ContactListContainer';
+import ContactApp from './component/ContactApp';
 
 class App extends Component {
   render() {
     return (
-      <ContactListContainer/>
+      <ContactApp />
     );
   }
 }
