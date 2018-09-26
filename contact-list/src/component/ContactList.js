@@ -3,7 +3,10 @@ import Contact from './Contact';
 
 class ContactList extends Component {
   render() {
-    let contacts = this.props.contacts;
+    let searchText = this.props.searchText;
+    let contacts = this.props.contacts.filter(
+      contact => contact.name.indexOf(searchText) !== -1
+    );
     return (
       <ul>
         {
