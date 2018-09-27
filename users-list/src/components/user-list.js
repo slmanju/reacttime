@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
 import UserRow from './user-item';
 
+import { connect } from 'react-redux';
+
 class UserList extends Component {
 
+  renderList() {
+    let users = this.props.users;
+    return users.map(user => {
+        return <UserRow firstName={ user.firstName }
+                        lastName={ user.lastName }
+                        id={ user.id } />
+    });
+  }
+
   render() {
-    let users = [
-      { firstName: "Manjula", lastName: "Jayawardana" },
-      { firstName: "Avatar", lastName: "Aang" },
-      { firstName: "Sokka", lastName: "Nonbender" }
-    ];
     return (
-      users.map(user => <UserRow firstName={user.firstName} lastName={user.lastName}/>)
+        <ul>
+          { this.renderList() }
+        </ul>
     )
   }
 
 }
 
-export default UserList
+function mapStateToProps(state) {
+  return {
+    users: state.users
+  }
+}
+
+export default connect(mapStateToProps)(UserList)
