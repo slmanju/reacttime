@@ -10,7 +10,7 @@ class UserList extends Component {
     return users.map(user => {
         return <UserRow firstName={ user.firstName }
                         lastName={ user.lastName }
-                        id={ user.id } />
+                        key={ user.id } />
     });
   }
 
