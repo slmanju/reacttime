@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class UserRow extends Component {
 
   handleClick(event) {
-      console.log('clicked');
       this.props.onClick();
   }
 
