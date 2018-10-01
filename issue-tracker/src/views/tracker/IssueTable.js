@@ -6,19 +6,21 @@ class IssueTable extends Component {
 
   _renderRows() {
     const issues = this.props.issues;
-    return issues.map(issue => <IssueRow item={ issue } />)
+    return issues.map(issue => <IssueRow item={ issue } key={ issue.id} />)
   }
 
   render() {
     return (
       <div>
         <table>
-          <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
-          </tr>
-          { this._renderRows() }
+          <tbody>
+            <tr>
+              <th>Company</th>
+              <th>Contact</th>
+              <th>Country</th>
+            </tr>
+            { this._renderRows() }
+          </tbody>
         </table>
       </div>
     )
