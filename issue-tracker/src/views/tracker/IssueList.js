@@ -24,6 +24,24 @@ class IssueList extends Component {
     }, 1000);
   }
 
+  addIssue(issue) {
+    const issues = this.state.issues.slice();
+    issue.id = issues.length + 1;
+    issues.push(issue);
+    this.setState({
+      issues
+    });
+  }
+
+  _addTestIssue() {
+    let issue = {
+      company: 'hello test',
+      contact: 'hello',
+      country: 'world'
+    }
+    this.addIssue(issue);
+  }
+
   render() {
     return (
       <div>
@@ -34,6 +52,9 @@ class IssueList extends Component {
         <IssueTable issues={ this.state.issues }/>
         <hr/>
         <h4>Issue add</h4>
+        <input type="text" placeholder="company" />
+        <input type="text" placeholder="contact" />
+        <input type="button" value="Add" onClick={ this._addTestIssue.bind(this) } />
       </div>
     )
   }
