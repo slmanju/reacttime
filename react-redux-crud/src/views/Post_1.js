@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 class Post extends Component {
 
   constructor() {
@@ -10,12 +12,18 @@ class Post extends Component {
 
   handleDelete(event) {
     event.preventDefault();
-    this.props.deletePost(this.props.post.id);
+    this.props.dispatch({
+      type: 'DELETE_POST',
+      id: this.props.post.id
+    });
   }
 
   handleEdit(event) {
     event.preventDefault();
-    this.props.editPost(this.props.post.id);
+    this.props.dispatch({
+      type: 'EDIT_POST',
+      id: this.props.post.id
+    });
   }
 
   render() {
@@ -35,5 +43,4 @@ class Post extends Component {
     );
  }
 }
-
-export default Post;
+export default connect()(Post);

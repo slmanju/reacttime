@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 class PostForm extends Component {
 
   constructor() {
@@ -17,8 +19,10 @@ class PostForm extends Component {
       editing: false
     }
 
-    this.props.addPost(post);
-
+    this.props.dispatch({
+      type: 'ADD_POST',
+      data: post
+    });
     form.title.value = '';
     form.description.value = '';
   }
@@ -39,4 +43,10 @@ class PostForm extends Component {
     }
 }
 
-export default PostForm
+function mapStateToProps(state) {
+  return {
+    posts: state
+  }
+}
+
+export default connect(mapStateToProps)(PostForm)

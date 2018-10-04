@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 
-import { connect } from 'react-redux';
-
 import Post from './Post';
 import PostEdit from './PostEdit';
 
 class AllPosts extends Component {
 
+  _renderPost(post) {
+    return <Post key={ post.id }
+                post={ post }
+                deletePost={ this.props.deletePost }
+                editPost={ this.props.editPost }/>
+  }
+
+  _renderEdit(post) {
+    return <PostEdit key={ post.id }
+                    post={ post }
+                    updatePost={ this.props.updatePost }/>
+  }
+
   _render() {
-    return this.props.posts.map(
+    let posts = this.props.posts;
+    return posts.map(
       (post) => (
-        post.editing ? <PostEdit key={ post.id } post={ post } /> : <Post key={ post.id } post={ post } />
+        post.editing ? this._renderEdit(post) : this._renderPost(post)
       )
     )
   }
@@ -30,10 +42,4 @@ class AllPosts extends Component {
    }
 }
 
-function mapStateToProps(state) {
-  return {
-    posts: state
-  }
-}
-
-export default connect(mapStateToProps)(AllPosts)
+export default AllPosts

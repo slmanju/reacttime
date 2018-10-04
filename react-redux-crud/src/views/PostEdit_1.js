@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 class PostEdit extends Component {
 
   constructor() {
@@ -18,13 +20,17 @@ class PostEdit extends Component {
     event.preventDefault();
     const form = document.forms.editForm;
     const post = {
-      id: this.props.post.id,
+      id: Date.now(),
       title: form.title.value,
       description: form.description.value,
       editing: false
     }
 
-    this.props.updatePost(this.props.post.id, post);
+    this.props.dispatch({
+      type: 'UPDATE_POST',
+      id: this.props.post.id,
+      data: post
+    });
   }
 
   render() {
@@ -48,4 +54,4 @@ class PostEdit extends Component {
     }
 }
 
-export default PostEdit
+export default connect()(PostEdit)
