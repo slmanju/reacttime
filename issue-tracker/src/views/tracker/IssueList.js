@@ -17,27 +17,39 @@ class IssueList extends Component {
     setTimeout(() => {
       this.setState({
         issues: [
-          { id: 1, company: 'company1', contact: 'contact1', country: 'country1' },
-          { id: 2, company: 'company2', contact: 'contact2', country: 'country2' },
-          { id: 3, company: 'company2', contact: 'contact2', country: 'country2' }
-        ]
+          {
+            id: 1,
+            status: 'Open',
+            owner: 'Ravan',
+            created: new Date('2016-08-15'),
+            effort: 5,
+            completionDate: new Date('2016-08-20'),
+            title: 'Error in console when clicking Add'
+          },
+          {
+            id: 2,
+            status: 'Assigned', owner: 'Eddie',
+            created: new Date('2016-08-16'),
+            effort: 14,
+            completionDate: new Date('2016-08-30'),
+            title: 'Missing bottom border on panel'
+          }
+      ]
       });
-    }, 1000);
+    }, 200);
   }
 
   addIssue(issue) {
     const issues = this.state.issues.slice();
-    issue.id = issues.length + 1;
+    issue.id = Date.now();
     issues.push(issue);
-    this.setState({
-      issues
-    });
+    this.setState({ issues });
   }
 
   render() {
     return (
       <div>
-        <h1>Issue List</h1>
+        <h3>Issue List</h3>
         <hr/>
         <h4>Issue filter</h4>
         <hr/>

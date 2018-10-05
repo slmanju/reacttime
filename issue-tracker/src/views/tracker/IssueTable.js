@@ -12,12 +12,17 @@ class IssueTable extends Component {
   render() {
     return (
       <div>
-        <table>
+        <table border="1">
           <tbody>
             <tr>
-              <th>Company</th>
-              <th>Contact</th>
-              <th>Country</th>
+              <th>Id</th>
+              <th>Status</th>
+              <th>Owner</th>
+              <th>Created</th>
+              <th>Effort</th>
+              <th>Completion Date</th>
+              <th>Title</th>
+              <th>Action</th>
             </tr>
             { this._renderRows() }
           </tbody>

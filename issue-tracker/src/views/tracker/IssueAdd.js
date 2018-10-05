@@ -4,70 +4,31 @@ class IssueAdd extends Component {
 
   constructor() {
     super();
-    this.state = {
-      company: '',
-      contact: '',
-      country: ''
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    let state = this.state;
+    let form = document.forms.issueForm;
     this.props.handleAddIssue({
-      company: state.company,
-      contact: state.contact,
-      country: state.country
+      id: Date.now(),
+      created: new Date(),
+      status: 'Open',
+      owner: form.owner.value,
+      title: form.title.value
     });
-    this.setState({
-      company: '',
-      contact: '',
-      country: ''
-    });
+    form.owner.value = '';
+    form.title.value = '';
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={ this.handleSubmit }>
-          <label>
-            Company:
-            <input
-                name="company"
-                type="text"
-                value={ this.state.company }
-                onChange={ this.handleInputChange } />
-          </label>
-          <label>
-            Contact:
-            <input
-                name="contact"
-                type="text"
-                value={ this.state.contact }
-                onChange={ this.handleInputChange } />
-          </label>
-          <label>
-            Country:
-            <input
-                name="country"
-                type="text"
-                value={ this.state.country }
-                onChange={ this.handleInputChange } />
-          </label>
-          <input type="submit" value="Submit" />
+        <form onSubmit={ this.handleSubmit } name="issueForm">
+          <input type="text" name="owner" placeholder="Owner" />
+          <input type="text" name="title" placeholder="Title" />
+          <button>Add</button>
         </form>
       </div>
     )
