@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
+import { withRouter } from 'react-router-dom';
 
 import IssueTable from './IssueTable';
 import IssueAdd from './IssueAdd';
@@ -12,6 +13,21 @@ class IssueList extends Component {
     this.state = {
       issues: []
     };
+    this.setQuery = this.setQuery.bind(this);
+  }
+
+  setQuery() {
+    console.log(this.props);
+    // this.props.router.push({ pathname: this.props.location.pathname, query });
+    // this.props.history.push('/');
+    const filter = {};
+    filter.status = 'New';
+    // this.props.history.push({ pathname: this.props.location.pathname, query: filter });
+    // this.props.history.push('/issues?color=blue');
+    this.props.history.push({
+      pathname: '/issues',
+      search: '?color=blue'
+    });
   }
 
   componentDidMount() {
@@ -53,6 +69,7 @@ class IssueList extends Component {
     return (
       <div>
         <h3>Issue List</h3>
+        <button onClick={ this.setQuery }>Query</button>
         <hr/>
         <IssueFilter filterParams={ filterParams } />
         <hr/>
@@ -64,4 +81,4 @@ class IssueList extends Component {
   }
 }
 
-export default IssueList
+export default withRouter(IssueList);

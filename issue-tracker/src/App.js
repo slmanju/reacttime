@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import IssueList from './views/tracker/IssueList';
 import IssueEdit from './views/tracker/IssueEdit';
@@ -30,7 +30,6 @@ class App extends Component {
           <Route path="/issues/delete/:id" component={ IssueEdit } exact />
           <Route path="/about" component={ About } />
           <Route component={ PageNotFound } />
-          <Redirect to="/" />
         </Switch>
       </div>
     );
