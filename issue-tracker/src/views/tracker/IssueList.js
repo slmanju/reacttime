@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 
 import IssueTable from './IssueTable';
 import IssueAdd from './IssueAdd';
+import IssueFilter from './IssueFilter';
 
 class IssueList extends Component {
 
@@ -47,11 +49,12 @@ class IssueList extends Component {
   }
 
   render() {
+    const filterParams = queryString.parse(this.props.location.search);
     return (
       <div>
         <h3>Issue List</h3>
         <hr/>
-        <h4>Issue filter</h4>
+        <IssueFilter filterParams={ filterParams } />
         <hr/>
         <IssueTable issues={ this.state.issues } />
         <hr/>
