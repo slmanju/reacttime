@@ -22,11 +22,13 @@ class IssueList extends Component {
     // this.props.history.push('/');
     const filter = {};
     filter.status = 'New';
+    filter.effort_gte = '2';
+    filter.effort_lte = '8';
     // this.props.history.push({ pathname: this.props.location.pathname, query: filter });
     // this.props.history.push('/issues?color=blue');
     this.props.history.push({
       pathname: '/issues',
-      search: '?color=blue'
+      search: queryString.stringify(filter)
     });
   }
 
