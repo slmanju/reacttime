@@ -13,23 +13,7 @@ class IssueList extends Component {
     this.state = {
       issues: []
     };
-    this.setQuery = this.setQuery.bind(this);
-  }
-
-  setQuery() {
-    console.log(this.props);
-    // this.props.router.push({ pathname: this.props.location.pathname, query });
-    // this.props.history.push('/');
-    const filter = {};
-    filter.status = 'New';
-    filter.effort_gte = '2';
-    filter.effort_lte = '8';
-    // this.props.history.push({ pathname: this.props.location.pathname, query: filter });
-    // this.props.history.push('/issues?color=blue');
-    this.props.history.push({
-      pathname: '/issues',
-      search: queryString.stringify(filter)
-    });
+    this.setFilter = this.setFilter.bind(this);
   }
 
   componentDidMount() {
@@ -66,14 +50,20 @@ class IssueList extends Component {
     this.setState({ issues });
   }
 
+  setFilter(filters) {
+    this.props.history.push({
+      pathname: '/issues',
+      search: queryString.stringify(filters)
+    });
+  }
+
   render() {
     const filterParams = queryString.parse(this.props.location.search);
     return (
       <div>
         <h3>Issue List</h3>
-        <button onClick={ this.setQuery }>Query</button>
         <hr/>
-        <IssueFilter filterParams={ filterParams } />
+        <IssueFilter filterParams={ filterParams } setFilter={ this.setFilter }/>
         <hr/>
         <IssueTable issues={ this.state.issues } />
         <hr/>
