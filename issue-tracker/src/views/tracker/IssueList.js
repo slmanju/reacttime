@@ -6,6 +6,8 @@ import IssueTable from './IssueTable';
 import IssueAdd from './IssueAdd';
 import IssueFilter from './IssueFilter';
 
+import IssueService from '../../service/IssueService';
+
 class IssueList extends Component {
 
   constructor() {
@@ -14,40 +16,25 @@ class IssueList extends Component {
       issues: []
     };
     this.setFilter = this.setFilter.bind(this);
+    this.issueService = new IssueService();
   }
 
   componentDidMount() {
+    this._loadData();
+  }
+
+  _loadData() {
     // simulate ajax call
     setTimeout(() => {
       this.setState({
-        issues: [
-          {
-            id: 1,
-            status: 'Open',
-            owner: 'Ravan',
-            created: new Date('2016-08-15'),
-            effort: 5,
-            completionDate: new Date('2016-08-20'),
-            title: 'Error in console when clicking Add'
-          },
-          {
-            id: 2,
-            status: 'Assigned', owner: 'Eddie',
-            created: new Date('2016-08-16'),
-            effort: 14,
-            completionDate: new Date('2016-08-30'),
-            title: 'Missing bottom border on panel'
-          }
-      ]
+        issues: this.issueService.findAll()
       });
     }, 200);
   }
 
   addIssue(issue) {
-    const issues = this.state.issues.slice();
-    issue.id = Date.now();
-    issues.push(issue);
-    this.setState({ issues });
+    this.issueService.save(issue);
+    this._loadData();
   }
 
   setFilter(filters) {
@@ -58,12 +45,10 @@ class IssueList extends Component {
   }
 
   render() {
-    const filterParams = queryString.parse(this.props.location.search);
     return (
       <div>
-        <h3>Issue List</h3>
-        <hr/>
-        <IssueFilter filterParams={ filterParams } setFilter={ this.setFilter }/>
+        <IssueFilter filterParams={ queryString.parse(this.props.location.search) }
+                      setFilter={ this.setFilter } />
         <hr/>
         <IssueTable issues={ this.state.issues } />
         <hr/>

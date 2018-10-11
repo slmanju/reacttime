@@ -14,6 +14,17 @@ class IssueEdit extends Component {
     this.onChangeEffortGte = this.onChangeEffortGte.bind(this);
     this.onChangeEffortLte = this.onChangeEffortLte.bind(this);
     this.handleFilterApply = this.handleFilterApply.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
+    this.resetFilter = this.resetFilter.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      status: newProps.filterParams.status || '',
+      effort_gte: newProps.filterParams.effort_gte || '',
+      effort_lte: newProps.filterParams.effort_lte || '',
+      changed: false,
+    });
   }
 
   onChangeStatus(event) {
@@ -36,6 +47,19 @@ class IssueEdit extends Component {
     this.props.setFilter(newFilter);
   }
 
+  clearFilter() {
+    this.props.setFilter({});
+  }
+
+  resetFilter() {
+    this.setState({
+      status: this.props.filterParams.status || '',
+      effort_gte: this.props.filterParams.effort_gte || '',
+      effort_lte: this.props.filterParams.effort_lte || '',
+      changed: false,
+    });
+  }
+
   render() {
     return (
       <div>
@@ -53,8 +77,8 @@ class IssueEdit extends Component {
         <input size={ 5 } value={ this.state.effort_gte } onChange={ this.onChangeEffortGte } /> &nbsp;-&nbsp;
         <input size={ 5 } value={ this.state.effort_lte } onChange={ this.onChangeEffortLte } />
         <button onClick={ this.handleFilterApply }>Apply</button>
-        <button>Reset</button>
-        <button>Clear</button>
+        <button onClick={ this.resetFilter }>Reset</button>
+        <button onClick={ this.clearFilter }>Clear</button>
       </div>
     )
   }
