@@ -29,7 +29,7 @@ class IssueList extends Component {
       this.setState({
         issues: this.issueService.findAll()
       });
-    }, 200);
+    }, 60);
   }
 
   addIssue(issue) {
@@ -42,6 +42,13 @@ class IssueList extends Component {
       pathname: '/issues',
       search: queryString.stringify(filters)
     });
+
+    setTimeout(() => {
+      const filtered = this.issueService.search(filters);
+      this.setState({
+        issues: filtered
+      });
+    }, 60);
   }
 
   render() {

@@ -36,6 +36,14 @@ class IssueService {
     return this.issues.find(issue => issue.id === id);
   }
 
+  search(filter) {
+    let result = this.issues;
+    if (filter.status) {
+      result = result.filter(issue => issue.status === filter.status);
+    }
+    return result;
+  }
+
 }
 
 export default IssueService;
