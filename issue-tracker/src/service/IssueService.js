@@ -33,7 +33,7 @@ class IssueService {
   }
 
   findBydId(id) {
-    return this.issues.find(issue => issue.id === id);
+    return this.issues.find(issue => issue.id === Number(id));
   }
 
   search(filter) {
@@ -46,4 +46,6 @@ class IssueService {
 
 }
 
-export default IssueService;
+let issueService = new IssueService();
+
+export default issueService;

@@ -6,7 +6,7 @@ import IssueTable from './IssueTable';
 import IssueAdd from './IssueAdd';
 import IssueFilter from './IssueFilter';
 
-import IssueService from '../../service/IssueService';
+import issueService from '../../service/IssueService';
 
 class IssueList extends Component {
 
@@ -16,7 +16,6 @@ class IssueList extends Component {
       issues: []
     };
     this.setFilter = this.setFilter.bind(this);
-    this.issueService = new IssueService();
   }
 
   componentDidMount() {
@@ -27,13 +26,13 @@ class IssueList extends Component {
     // simulate ajax call
     setTimeout(() => {
       this.setState({
-        issues: this.issueService.findAll()
+        issues: issueService.findAll()
       });
     }, 60);
   }
 
   addIssue(issue) {
-    this.issueService.save(issue);
+    issueService.save(issue);
     this._loadData();
   }
 
@@ -44,7 +43,7 @@ class IssueList extends Component {
     });
 
     setTimeout(() => {
-      const filtered = this.issueService.search(filters);
+      const filtered = issueService.search(filters);
       this.setState({
         issues: filtered
       });
