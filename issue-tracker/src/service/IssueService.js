@@ -28,6 +28,11 @@ class IssueService {
     this.issues.push(issue);
   }
 
+  update(updatedIssue) {
+    let foundIndex = this.issues.findIndex(issue => issue.id === Number(updatedIssue.id));
+    this.issues[foundIndex] = updatedIssue;
+  }
+
   findAll() {
     return this.issues;
   }

@@ -26,6 +26,7 @@ class IssueEdit extends Component {
       }
     };
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -43,14 +44,22 @@ class IssueEdit extends Component {
   }
 
   onChange(event) {
-    console.log();
+    const issue = Object.assign({}, this.state.issue);
+    issue[event.target.name] = event.target.value;
+    this.setState({ issue });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    issueService.update(this.state.issue);
+    alert('Updated issue successfully.');
   }
 
   render() {
     const issue = this.state.issue;
     return (
       <div>
-        <form>
+        <form onSubmit={ this.onSubmit }>
           ID: {issue._id}
           <br />
           Created: {issue.created}
