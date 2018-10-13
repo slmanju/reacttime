@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import issueService from '../../service/IssueService';
+import NumberInput from './NumberInput';
 
 // TODO duplicate code
 function formatDate(date) {
@@ -43,9 +44,10 @@ class IssueEdit extends Component {
       this.setState({ issue });
   }
 
-  onChange(event) {
+  onChange(event, convertedValue) {
     const issue = Object.assign({}, this.state.issue);
-    issue[event.target.name] = event.target.value;
+    const value = (convertedValue !== undefined) ? convertedValue : event.target.value;
+    issue[event.target.name] = value;
     this.setState({ issue });
   }
 
@@ -75,12 +77,17 @@ class IssueEdit extends Component {
           <br />
           Owner: <input name="owner" value={issue.owner} onChange={this.onChange} />
           <br />
-          Effort: <input size={5} name="effort" value={issue.effort} onChange={this.onChange} />
+          Effort: <NumberInput size={ 5 } name="effort"
+                          value={ issue.effort }
+                          onChange={ this.onChange }/>
           <br />
           Completion Date: <input name="completionDate" value={issue.completionDate} onChange={this.onChange} />
           <br />
           Title: <input name="title" size={50} value={issue.title} onChange={this.onChange} />
           <br />
+
+          <hr />
+
           <button type="submit">Update</button>
           <Link to="/issues">Back</Link>
         </form>
