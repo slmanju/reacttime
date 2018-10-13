@@ -16,6 +16,7 @@ class IssueList extends Component {
       issues: []
     };
     this.setFilter = this.setFilter.bind(this);
+    this.deleteIssue = this.deleteIssue.bind(this);
   }
 
   componentDidMount() {
@@ -28,11 +29,16 @@ class IssueList extends Component {
       this.setState({
         issues: issueService.findAll()
       });
-    }, 60);
+    }, 10);
   }
 
   addIssue(issue) {
     issueService.save(issue);
+    this._loadData();
+  }
+
+  deleteIssue(id) {
+    issueService.delete(id);
     this._loadData();
   }
 
@@ -56,7 +62,7 @@ class IssueList extends Component {
         <IssueFilter filterParams={ queryString.parse(this.props.location.search) }
                       setFilter={ this.setFilter } />
         <hr/>
-        <IssueTable issues={ this.state.issues } />
+        <IssueTable issues={ this.state.issues } deleteIssue={ this.deleteIssue } />
         <hr/>
         <IssueAdd handleAddIssue={ this.addIssue.bind(this) } />
       </div>

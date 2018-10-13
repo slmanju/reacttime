@@ -6,7 +6,7 @@ class IssueTable extends Component {
 
   _renderRows() {
     const issues = this.props.issues;
-    return issues.map(issue => <IssueRow item={ issue } key={ issue.id} />)
+    return issues.map(issue => <IssueRow item={ issue } key={ issue.id} onDelete={ this.props.deleteIssue } />)
   }
 
   render() {

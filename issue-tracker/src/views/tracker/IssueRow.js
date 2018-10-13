@@ -15,6 +15,16 @@ function formatDate(date) {
 }
 
 class IssueRow extends Component {
+
+  constructor() {
+    super();
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  onDelete() {
+    this.props.onDelete(this.props.item.id);
+  }
+
   render() {
     const issue = this.props.item;
     const Separator = () => <span>|&nbsp;</span>;
@@ -30,7 +40,7 @@ class IssueRow extends Component {
         <td>
           <Link to={ `/issues/view/${issue.id}` }>View</Link> <Separator />
           <Link to={ `/issues/edit/${issue.id}` }>Edit</Link> <Separator />
-          <Link to={ `/issues/delete/${issue.id}` }>Delete</Link>
+          <button onClick={ this.onDelete }>Delete</button>
         </td>
       </tr>
     )

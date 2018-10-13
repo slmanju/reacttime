@@ -49,6 +49,11 @@ class IssueService {
     return result;
   }
 
+  delete(id) {
+    let foundIndex = this.issues.findIndex(issue => issue.id === Number(id));
+    this.issues.splice(foundIndex, 1);
+  }
+
 }
 
 let issueService = new IssueService();
