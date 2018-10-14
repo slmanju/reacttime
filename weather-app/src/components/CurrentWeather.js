@@ -12,9 +12,8 @@ export default class CurrentWeather extends Component {
             <Panel>
               <Panel.Body>
                 <div className="current-weather">
-                  <div className="weather-temp">Colombo</div>
-                  <div className="weather-temp">max 35 | min 25</div>
-                  <div className="weather-temp">33 &deg;&nbsp;<sup>c</sup></div>
+                  <div className="weather-temp">Colomb (25 ~ 35)</div>
+                  <div className="weather-now">33 &deg;&nbsp;<sup>c</sup></div>
                   <div className="weather-temp">cloudy</div>
                   <div className="weather-temp">updated at </div>
                   <button>Refresh</button>

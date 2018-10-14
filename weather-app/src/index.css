@@ -14,13 +14,17 @@ code {
 }
 
 .current-weather {
-    background-color: #ECEFF1;
+    /* background-color: #ECEFF1; */
     text-align: center;
     padding: 10px;
     width: 100%;
 }
 
+.weather-now {
+    font-size: 5rem;
+}
+
 .weather-temp {
-    font-size: 3rem;
+    font-size: 2rem;
     vertical-align: middle;
 }
