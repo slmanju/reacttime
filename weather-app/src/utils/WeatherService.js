@@ -45,12 +45,29 @@ function fetchCurrentWeather() {
 
 function fetchHourlyWeather() {
   const URL = `${WEATHER_API}/forecast?q=Piliyandala&units=metric&cnt=12&appid=${KEY}`;
-  console.log(URL);
   return new Promise((resolve, reject) => {
     axios.get(URL).then(response => {
       if (response && response.status === 200) {
         const data = response.data;
-         resolve(data);
+        const location = {
+           name: data.city.name,
+           latitude: data.city.coord.lat,
+           longitude: data.city.coord.lon
+        };
+        let hourlyWeather = data.list.map(forecast => {
+          return {
+            condition: forecast.weather[0].description,
+            date: new Date(forecast.dt * 1000),
+            icon: `${OPEN_WEATHER_IMG_URL}/${forecast.weather[0].icon}.png`,
+            location: location,
+            temperature: {
+                now: forecast.main.temp,
+                minimum: forecast.main.temp_min,
+                maximum: forecast.main.temp_max
+            }
+          }
+        });
+        resolve(hourlyWeather);
       } else {
         reject('Weather data not found');
       }
@@ -95,6 +112,8 @@ class WeatherService {
 
 const weatherService = new WeatherService();
 
-weatherService.findDailyWeather().then(data => console.log(data));
+weatherService.findHourlyWeather().then(data => {
+  console.log(data);
+});
 
 export default weatherService;

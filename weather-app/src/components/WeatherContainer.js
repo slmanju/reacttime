@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import CurrentWeather from './CurrentWeather';
-import DailyWeather from './DailyWeather';
 import HourlyWeather from './HourlyWeather';
 
 import weatherService from '../utils/WeatherService';
@@ -25,7 +24,8 @@ export default class WeatherContainer extends Component {
              minimum: '',
              maximum: ''
          }
-      }
+      },
+      hourlyWeather: []
     };
   }
 
@@ -33,14 +33,17 @@ export default class WeatherContainer extends Component {
     weatherService.findCurrentWeather().then(currentWeather => {
       this.setState({ currentWeather });
     });
+
+    weatherService.findHourlyWeather().then(hourlyWeather => {
+      this.setState({ hourlyWeather });
+    });
   }
 
   render() {
     return (
       <div>
         <CurrentWeather currentWeather={ this.state.currentWeather } />
-        <HourlyWeather />
-        <DailyWeather />
+        <HourlyWeather hourlyWeather={ this.state.hourlyWeather } />
       </div>
     );
   }
