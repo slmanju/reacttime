@@ -9,7 +9,7 @@ const OPEN_WEATHER_IMG_URL = 'http://openweathermap.org/img/w';
 // daily `${OPEN_WEATHER_BASE_URL}/forecast/daily?appid=${OPEN_WEATHER_API_KEY}&lat=${latitude}&lon=${longitude}&units=metric&cnt=7`;
 // hourly ${OPEN_WEATHER_BASE_URL}/forecast?appid=${OPEN_WEATHER_API_KEY}&lat=${latitude}&lon=${longitude}&units=metric&cnt=12`;
 
-function fetchDailyWeather() {
+function fetchCurrentWeather() {
   const URL = `${WEATHER_API}/weather?q=Piliyandala&units=metric&appid=${KEY}`;
   return new Promise((resolve, reject) => {
     axios.get(URL).then(response => {
@@ -43,14 +43,58 @@ function fetchDailyWeather() {
   });
 }
 
+function fetchHourlyWeather() {
+  const URL = `${WEATHER_API}/forecast?q=Piliyandala&units=metric&cnt=12&appid=${KEY}`;
+  console.log(URL);
+  return new Promise((resolve, reject) => {
+    axios.get(URL).then(response => {
+      if (response && response.status === 200) {
+        const data = response.data;
+         resolve(data);
+      } else {
+        reject('Weather data not found');
+      }
+    }).catch(error => {
+      reject(error.message);
+    });
+  });
+}
+
+function fetchDailyWeather() {
+  const URL = `${WEATHER_API}/forecast?q=Piliyandala&units=metric&appid=${KEY}`;
+  console.log(URL);
+  return new Promise((resolve, reject) => {
+    axios.get(URL).then(response => {
+      if (response && response.status === 200) {
+        const data = response.data;
+         resolve(data);
+      } else {
+        reject('Weather data not found');
+      }
+    }).catch(error => {
+      reject(error.message);
+    });
+  });
+}
+
 class WeatherService {
 
   findCurrentWeather() {
+    return fetchCurrentWeather();
+  }
+
+  findHourlyWeather() {
+    return fetchHourlyWeather();
+  }
+
+  findDailyWeather() {
     return fetchDailyWeather();
   }
 
 }
 
 const weatherService = new WeatherService();
+
+weatherService.findDailyWeather().then(data => console.log(data));
 
 export default weatherService;
