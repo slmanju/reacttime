@@ -32,7 +32,7 @@ function fetchDailyWeather() {
                 maximum: data.main.temp_max
             }
          };
-         // console.log('dailyForcast', dailyForcast);
+        //  console.log('dailyForcast', dailyForcast);
          resolve(dailyForcast);
       } else {
         reject('Weather data not found');
@@ -45,10 +45,12 @@ function fetchDailyWeather() {
 
 class WeatherService {
 
-  findDailyWeather() {
+  findCurrentWeather() {
     return fetchDailyWeather();
   }
 
 }
 
-export default WeatherService;
+const weatherService = new WeatherService();
+
+export default weatherService;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Header, Brand } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 export default class AppHeader extends Component {
 
