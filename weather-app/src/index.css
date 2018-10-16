@@ -28,3 +28,33 @@ code {
     font-size: 2rem;
     vertical-align: middle;
 }
+
+.carousel {
+  background-color: #009688;
+}
+
+.center {
+  text-align: center;;
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.navbar-default {
+  background-image: none;
+  box-shadow: none;
+  background-color: #009688;
+  border-color: #009688;
+  color: #FFF;
+}
+
+.navbar-brand {
+  color: #FFF;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFF;
+}

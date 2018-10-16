@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Grid, Row, Col, Well } from 'react-bootstrap';
+import { Panel, Grid, Row, Col, Well, Carousel } from 'react-bootstrap';
 
 class HourlyWeatherCard extends Component {
   render() {
@@ -7,18 +7,51 @@ class HourlyWeatherCard extends Component {
     const date = weather.date;
     const dateTime = (date) ? `${date.toLocaleDateString()} ${date.toLocaleTimeString()}` : '';
     return (
-      <Col sm={4} md={4}>
-        <Well>
+      <Col className="center">
+        <div>
+          <div>{ weather.temperature.now } &deg;&nbsp;<sup>c</sup></div>
           <div>
-            <div>{ weather.temperature.now } &deg;&nbsp;<sup>c</sup></div>
-            <div>
-              <span>{ weather.condition }</span>
-              <span><img src={ weather.icon } alt="condition" /></span>
-            </div>
-            <div>{ dateTime }</div>
+            <span>{ weather.condition }</span>
+            <span><img src={ weather.icon } alt="condition" /></span>
           </div>
-        </Well>
+          <div>{ dateTime }</div>
+        </div>
       </Col>
+    );
+  }
+}
+
+class ControlledCarousel extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.state = {
+      index: 0,
+      direction: null
+    };
+  }
+
+  handleSelect(selectedIndex, e) {
+    this.setState({
+      index: selectedIndex,
+      direction: e.direction
+    });
+  }
+
+  render() {
+    const { index, direction } = this.state;
+    const forecasts = this.props.forecasts;
+
+    return (
+      <Carousel activeIndex={ index } direction={ direction } onSelect={ this.handleSelect }>
+        {
+          forecasts.map((weather, index) => {
+            return <Carousel.Item key={ index }>
+              <HourlyWeatherCard weather={ weather } key={ index } />
+            </Carousel.Item>
+          })
+        }
+      </Carousel>
     );
   }
 }
@@ -34,7 +67,9 @@ export default class HourlyWeather extends Component {
           <Col sm={8} md={8}>
             <Panel>
               <Panel.Body>
-                { hourlyWeather.map((weather, index) => <HourlyWeatherCard weather={ weather } key={ index } />) }
+
+                <ControlledCarousel forecasts={ hourlyWeather }/>
+
               </Panel.Body>
             </Panel>
           </Col>
@@ -44,3 +79,4 @@ export default class HourlyWeather extends Component {
     );
   }
 }
+//{ hourlyWeather.map((weather, index) => <HourlyWeatherCard weather={ weather } key={ index } />) }

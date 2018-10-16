@@ -22,7 +22,6 @@ export default class CurrentWeather extends Component {
                     <span><img src={ currentWeather.icon } alt="condition" /></span>
                   </div>
                   <div className="weather-temp">{ dateTime }</div>
-                  <button>Refresh</button>
                 </div>
               </Panel.Body>
             </Panel>
