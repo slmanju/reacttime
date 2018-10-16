@@ -31,8 +31,7 @@ export default class WeatherContainer extends Component {
     this.search = this.search.bind(this);
   }
 
-  componentDidMount() {
-    const city = 'Piliyandala';
+  _findWeather(city) {
     weatherService.findCurrentWeather(city).then(currentWeather => {
       this.setState({ currentWeather });
     });
@@ -42,14 +41,12 @@ export default class WeatherContainer extends Component {
     });
   }
 
-  search(city) {
-    weatherService.findCurrentWeather(city).then(currentWeather => {
-      this.setState({ currentWeather });
-    });
+  componentDidMount() {
+    this._findWeather('Piliyandala');
+  }
 
-    weatherService.findHourlyWeather(city).then(hourlyWeather => {
-      this.setState({ hourlyWeather });
-    });
+  search(city) {
+    this._findWeather(city);
   }
 
   render() {
