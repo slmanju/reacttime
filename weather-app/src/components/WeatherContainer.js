@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import CurrentWeather from './CurrentWeather';
 import HourlyWeather from './HourlyWeather';
+import WeatherSearch from './WeatherSearch';
 
 import weatherService from '../utils/WeatherService';
 
@@ -27,14 +28,26 @@ export default class WeatherContainer extends Component {
       },
       hourlyWeather: []
     };
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
-    weatherService.findCurrentWeather().then(currentWeather => {
+    const city = 'Piliyandala';
+    weatherService.findCurrentWeather(city).then(currentWeather => {
       this.setState({ currentWeather });
     });
 
-    weatherService.findHourlyWeather().then(hourlyWeather => {
+    weatherService.findHourlyWeather(city).then(hourlyWeather => {
+      this.setState({ hourlyWeather });
+    });
+  }
+
+  search(city) {
+    weatherService.findCurrentWeather(city).then(currentWeather => {
+      this.setState({ currentWeather });
+    });
+
+    weatherService.findHourlyWeather(city).then(hourlyWeather => {
       this.setState({ hourlyWeather });
     });
   }
@@ -42,6 +55,7 @@ export default class WeatherContainer extends Component {
   render() {
     return (
       <div>
+        <WeatherSearch search={ this.search }/>
         <CurrentWeather currentWeather={ this.state.currentWeather } />
         <HourlyWeather hourlyWeather={ this.state.hourlyWeather } />
       </div>

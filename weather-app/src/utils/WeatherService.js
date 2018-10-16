@@ -5,8 +5,8 @@ import axios from 'axios';
 const WEATHER_API = 'http://api.openweathermap.org/data/2.5';
 const OPEN_WEATHER_IMG_URL = 'http://openweathermap.org/img/w';
 
-function fetchCurrentWeather() {
-  const URL = `${WEATHER_API}/weather?q=Piliyandala&units=metric&appid=${KEY}`;
+function fetchCurrentWeather(city) {
+  const URL = `${WEATHER_API}/weather?q=${city}&units=metric&appid=${KEY}`;
   return new Promise((resolve, reject) => {
     axios.get(URL).then(response => {
       if (response && response.status === 200) {
@@ -39,8 +39,8 @@ function fetchCurrentWeather() {
   });
 }
 
-function fetchHourlyWeather() {
-  const URL = `${WEATHER_API}/forecast?q=Piliyandala&units=metric&cnt=12&appid=${KEY}`;
+function fetchHourlyWeather(city) {
+  const URL = `${WEATHER_API}/forecast?q=${city}&units=metric&cnt=12&appid=${KEY}`;
   return new Promise((resolve, reject) => {
     axios.get(URL).then(response => {
       if (response && response.status === 200) {
@@ -75,12 +75,12 @@ function fetchHourlyWeather() {
 
 class WeatherService {
 
-  findCurrentWeather() {
-    return fetchCurrentWeather();
+  findCurrentWeather(city) {
+    return fetchCurrentWeather(city);
   }
 
-  findHourlyWeather() {
-    return fetchHourlyWeather();
+  findHourlyWeather(city) {
+    return fetchHourlyWeather(city);
   }
 
 }
